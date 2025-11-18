@@ -22,6 +22,7 @@ public class Schedule {
     @Column(length = 100, nullable = false)
     private String content;
 
+
     public Schedule(String writer, String title, String content) {
         this.writer = writer;
         this.title = title;

@@ -41,4 +41,5 @@ public class ScheduleController {
     public void deleteScheudle (@PathVariable Long scheduleId) {
         scheduleService.deleteResponse(scheduleId);
     }
+
 }

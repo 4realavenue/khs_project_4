@@ -88,4 +88,5 @@ public class ScheduleService {
         }
         scheduleRepository.deleteById(scheduleId);
     }
+
 }

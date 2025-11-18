@@ -7,8 +7,10 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public class ScheduleGetOneResponse {
+
     private final Long id;
     private final String writer;
     private final String title;
     private final String content;
+
 }
