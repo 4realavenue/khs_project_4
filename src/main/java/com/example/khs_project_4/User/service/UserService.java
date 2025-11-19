@@ -18,6 +18,20 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Transactional
+    public UserLoginResponse userLoginResponse(UserLoginRequest userLoginRequest) {
+        User user = userRepository.findByUserEmail(userLoginRequest.getUserEmail()).orElseThrow(
+                () -> new IllegalArgumentException("이메일이 잘 못 되었거나, 사용자가 등록되어 있지 않습니다")
+        );
+        if (!user.getUserPassword().equals(userLoginRequest.getUserPassword())) {
+            throw new IllegalArgumentException("비밀번호가 잘 못 되었거나, 사용자가 등록되어 있지 않습니다.");
+        }
+        return new UserLoginResponse(user.getUserId(),
+                user.getUserName(),
+                user.getUserEmail()
+        );
+    }
+
+    @Transactional
     public UserCreateResponse userCreateResponse(UserCreateRequest userCreateRequest) {
         User user = new User (
                 userCreateRequest.getUserName(),
