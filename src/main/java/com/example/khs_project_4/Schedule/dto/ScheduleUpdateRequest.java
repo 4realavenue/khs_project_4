@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class ScheduleUpdateRequest {
-    private Long userId;
     private String title;
     private String content;
 

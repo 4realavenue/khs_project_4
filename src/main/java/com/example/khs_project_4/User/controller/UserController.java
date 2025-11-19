@@ -48,7 +48,7 @@ public class UserController {
     }
 
     @DeleteMapping("/users/{userId}")
-    public void userDeleteResponse(@PathVariable Long userId) {
+    public void userDeleteResponse(@PathVariable Long userId, HttpSession httpSession) {
         userService.userDeleteResponse(userId);
     }
 

@@ -20,9 +20,9 @@ public class ScheduleService {
     private final UserRepository userRepository;
 
     @Transactional
-    public ScheduleCreateResponse createResponse(ScheduleCreateRequest request) {
-        User user = userRepository.findById(request.getUserId()).orElseThrow(
-                () -> new IllegalArgumentException("그 유저 아이디는 없는 아이디에요")
+    public ScheduleCreateResponse createResponse(ScheduleCreateRequest request, Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(
+                () -> new IllegalArgumentException("사용자가 존재하지 않습니다.")
         );
         Schedule schedule = new Schedule(
                 user,
@@ -74,13 +74,16 @@ public class ScheduleService {
     }
 
     @Transactional
-    public ScheduleUpdateResponse updateResponse(Long scheduleId, ScheduleUpdateRequest scheduleUpdateRequest) {
+    public ScheduleUpdateResponse updateResponse(Long scheduleId, ScheduleUpdateRequest scheduleUpdateRequest, Long userId) {
         Schedule schedule = scheduleRepository.findById(scheduleId).orElseThrow(
                 () -> new IllegalArgumentException("해당 일정은 비어 있습니다.")
         );
 
+        if (!schedule.getUser().getUserId().equals(userId)) {
+            throw new IllegalArgumentException("본인의 일정만 수정할 수 있습니다.");
+        }
+
         schedule.update(
-                scheduleUpdateRequest.getUserId(),
                 scheduleUpdateRequest.getTitle(),
                 scheduleUpdateRequest.getContent()
         );
@@ -94,12 +97,14 @@ public class ScheduleService {
     }
 
     @Transactional
-    public void deleteResponse(Long scheduleId) {
-        boolean scheduleExistence = scheduleRepository.existsById(scheduleId);
-        if (!scheduleExistence) {
-            throw new IllegalArgumentException("해당 일정은 비어 있습니다.");
+    public void deleteResponse(Long scheduleId, Long userId) {
+        Schedule schedule = scheduleRepository.findById(scheduleId).orElseThrow(
+                () -> new IllegalArgumentException("본인의 일정만 삭제할 수 있습니다.")
+        );
+        if (!schedule.getUser().getUserId().equals(userId)) {
+            throw new IllegalArgumentException("본인의 일정만 삭제할 수 있습니다.");
         }
-        scheduleRepository.deleteById(scheduleId);
+        scheduleRepository.delete(schedule);
     }
 
 }
