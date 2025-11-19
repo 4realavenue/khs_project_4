@@ -1,8 +1,7 @@
-package com.example.khs_project_4.controller;
+package com.example.khs_project_4.Schedule.controller;
 
-import com.example.khs_project_4.dto.*;
-import com.example.khs_project_4.service.ScheduleService;
-import lombok.Getter;
+import com.example.khs_project_4.Schedule.dto.*;
+import com.example.khs_project_4.Schedule.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

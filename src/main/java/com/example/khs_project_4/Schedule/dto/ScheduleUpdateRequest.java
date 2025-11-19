@@ -1,4 +1,4 @@
-package com.example.khs_project_4.dto;
+package com.example.khs_project_4.Schedule.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -6,8 +6,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class ScheduleUpdateRequest {
-
-    private String writer;
+    private Long userId;
     private String title;
     private String content;
 

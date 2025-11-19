@@ -1,4 +1,4 @@
-package com.example.khs_project_4.entity;
+package com.example.khs_project_4.Schedule.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

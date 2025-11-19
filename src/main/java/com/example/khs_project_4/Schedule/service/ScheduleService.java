@@ -1,8 +1,10 @@
-package com.example.khs_project_4.service;
+package com.example.khs_project_4.Schedule.service;
 
-import com.example.khs_project_4.dto.*;
-import com.example.khs_project_4.entity.Schedule;
-import com.example.khs_project_4.repository.ScheduleRepository;
+import com.example.khs_project_4.Schedule.dto.*;
+import com.example.khs_project_4.Schedule.entity.Schedule;
+import com.example.khs_project_4.Schedule.repository.ScheduleRepository;
+import com.example.khs_project_4.User.entity.User;
+import com.example.khs_project_4.User.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,11 +17,15 @@ import java.util.List;
 public class ScheduleService {
 
     private final ScheduleRepository scheduleRepository;
+    private final UserRepository userRepository;
 
     @Transactional
     public ScheduleCreateResponse createResponse(ScheduleCreateRequest request) {
+        User user = userRepository.findById(request.getUserId()).orElseThrow(
+                () -> new IllegalArgumentException("그 유저 아이디는 없는 아이디에요")
+        );
         Schedule schedule = new Schedule(
-                request.getWriter(),
+                user,
                 request.getTitle(),
                 request.getContent()
         );
@@ -27,7 +33,6 @@ public class ScheduleService {
 
         ScheduleCreateResponse response = new ScheduleCreateResponse(
                 saveSchedule.getId(),
-                saveSchedule.getWriter(),
                 saveSchedule.getTitle(),
                 saveSchedule.getContent(),
                 saveSchedule.getCreatedAt(),
@@ -43,7 +48,6 @@ public class ScheduleService {
         );
         return new ScheduleGetOneResponse(
                 schedule.getId(),
-                schedule.getWriter(),
                 schedule.getTitle(),
                 schedule.getContent(),
                 schedule.getCreatedAt(),
@@ -59,7 +63,6 @@ public class ScheduleService {
         for (Schedule schedule : scheduleList) {
             ScheduleGetOneResponse dto = new ScheduleGetOneResponse(
                     schedule.getId(),
-                    schedule.getWriter(),
                     schedule.getTitle(),
                     schedule.getContent(),
                     schedule.getCreatedAt(),
@@ -71,19 +74,18 @@ public class ScheduleService {
     }
 
     @Transactional
-    public ScheduleUpdateResponse updateResponse(Long scheduleId, ScheduleUpdateRequest scheduleUpdateResponse) {
+    public ScheduleUpdateResponse updateResponse(Long scheduleId, ScheduleUpdateRequest scheduleUpdateRequest) {
         Schedule schedule = scheduleRepository.findById(scheduleId).orElseThrow(
                 () -> new IllegalArgumentException("해당 일정은 비어 있습니다.")
         );
 
         schedule.update(
-                scheduleUpdateResponse.getWriter(),
-                scheduleUpdateResponse.getTitle(),
-                scheduleUpdateResponse.getContent()
+                scheduleUpdateRequest.getUserId(),
+                scheduleUpdateRequest.getTitle(),
+                scheduleUpdateRequest.getContent()
         );
         return new ScheduleUpdateResponse(
                 schedule.getId(),
-                schedule.getWriter(),
                 schedule.getTitle(),
                 schedule.getContent(),
                 schedule.getCreatedAt(),

@@ -1,20 +1,17 @@
-package com.example.khs_project_4.dto;
+package com.example.khs_project_4.Schedule.dto;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Getter
 @RequiredArgsConstructor
-public class ScheduleGetOneResponse {
+public class ScheduleCreateResponse {
 
     private final Long id;
-    private final String writer;
     private final String title;
     private final String content;
     private final LocalDateTime createdAd;
     private final LocalDateTime modifiedAt;
-
 }
