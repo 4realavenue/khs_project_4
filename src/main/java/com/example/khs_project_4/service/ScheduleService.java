@@ -29,7 +29,9 @@ public class ScheduleService {
                 saveSchedule.getId(),
                 saveSchedule.getWriter(),
                 saveSchedule.getTitle(),
-                saveSchedule.getContent()
+                saveSchedule.getContent(),
+                saveSchedule.getCreatedAt(),
+                saveSchedule.getModifiedAt()
         );
         return response;
     }
@@ -43,7 +45,9 @@ public class ScheduleService {
                 schedule.getId(),
                 schedule.getWriter(),
                 schedule.getTitle(),
-                schedule.getContent()
+                schedule.getContent(),
+                schedule.getCreatedAt(),
+                schedule.getModifiedAt()
         );
     }
 
@@ -54,7 +58,12 @@ public class ScheduleService {
         List<ScheduleGetOneResponse> dtos = new ArrayList<>();
         for (Schedule schedule : scheduleList) {
             ScheduleGetOneResponse dto = new ScheduleGetOneResponse(
-                    schedule.getId(), schedule.getWriter(), schedule.getTitle(), schedule.getContent()
+                    schedule.getId(),
+                    schedule.getWriter(),
+                    schedule.getTitle(),
+                    schedule.getContent(),
+                    schedule.getCreatedAt(),
+                    schedule.getModifiedAt()
             );
             dtos.add(dto);
         }
@@ -76,7 +85,9 @@ public class ScheduleService {
                 schedule.getId(),
                 schedule.getWriter(),
                 schedule.getTitle(),
-                schedule.getContent()
+                schedule.getContent(),
+                schedule.getCreatedAt(),
+                schedule.getModifiedAt()
         );
     }
 
