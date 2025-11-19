@@ -8,5 +8,7 @@ import lombok.NoArgsConstructor;
 public class UserUpdateRequest {
     private String userName;
     private String userEmail;
+    private String userPassword;
+
 
 }

@@ -1,6 +1,7 @@
 package com.example.khs_project_4.User.service;
 
 import com.example.khs_project_4.User.dto.*;
+
 import com.example.khs_project_4.User.entity.User;
 import com.example.khs_project_4.User.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,8 @@ public class UserService {
     public UserCreateResponse userCreateResponse(UserCreateRequest userCreateRequest) {
         User user = new User (
                 userCreateRequest.getUserName(),
-                userCreateRequest.getUserEmail()
+                userCreateRequest.getUserEmail(),
+                userCreateRequest.getUserPassword()
         );
         User savedUser = userRepository.save(user);
 
