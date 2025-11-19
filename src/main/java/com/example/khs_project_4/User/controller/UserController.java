@@ -18,11 +18,17 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/users/login")
-    public ResponseEntity<UserLoginResponse> userLoginResponse(@RequestBody UserLoginRequest userLoginRequest, HttpSession userLoginSession) {
+    public ResponseEntity<String> userLoginResponse(@RequestBody UserLoginRequest userLoginRequest, HttpSession userLoginSession) {
         UserLoginResponse response = userService.userLoginResponse(userLoginRequest);
         userLoginSession.setAttribute("loginUser", response);
 
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok("로그인 되었습니다.");
+    }
+
+    @PostMapping("/users/logout")
+    public ResponseEntity<String> userLogoutResponse(HttpSession httpSession) {
+        httpSession.invalidate();
+        return ResponseEntity.ok("로그아웃 되었습니다.");
     }
 
     @PostMapping("/users")
@@ -51,6 +57,5 @@ public class UserController {
     public void userDeleteResponse(@PathVariable Long userId, HttpSession httpSession) {
         userService.userDeleteResponse(userId);
     }
-
 
 }
