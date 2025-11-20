@@ -17,7 +17,7 @@ Java 언어를 사용한 Spring boot를 활용해서 만든 "일정 관리 앱 D
 
 이번 프로젝트에서는
 >일정의 [생성], [전체조회], [단건조회], [수정], [삭제] 기능과
-유저의 [생성], [전체조회], [단건조회], [수정], [삭제], [로그인], [로그아웃] 의 기능이 추가 되었다.
+>유저의 [생성], [전체조회], [단건조회], [수정], [삭제], [로그인], [로그아웃] 의 기능이 추가 되었다.
 
 Session과 Cookie를 이용하여 로그인 기능을 구현하는 것을 목표로, 
 로그인이 되어 있지 않을 때, 일정의 작업을 수행하려고 하면 예외 처리를 이용하였다.
@@ -32,9 +32,9 @@ Windows 환경에서 Java 버전은 17 버전으로 작업 했다.
 프로젝트는 Sprint Boot로 설정했으며,
 Spring Boot 설정 시 Dependencies(종속)은
 >- Lombok
-- MySQL Driver
-- Spring Data JPA
-- Spring Web
+>- MySQL Driver
+>- Spring Data JPA
+>- Spring Web
 
 위 4개를 추가하고 프로젝트를 시작했다
 
